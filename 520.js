@@ -10,6 +10,17 @@ if(!Array.prototype.last){
     };
 };
 
+//轉換query string
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
 //初始化
 var init = () =>{
 	canvas = document.getElementById("canvas");
@@ -36,8 +47,16 @@ var init = () =>{
 		//畫布像素(?)
 		canvas.width = w;
 		canvas.height = h;
+		//讀檔圈圈
+		if(exportRoot.loading)exportRoot.loading.x = w/2;
+		//標題
+		if(exportRoot.title)exportRoot.title.x = w/2;
+		//副標題
+		if(exportRoot.subtitle)exportRoot.subtitle.x = w/2;
 		//標題愛心
 		if(exportRoot.heart_title)exportRoot.heart_title.x = w/2;
+		//內容
+		if(exportRoot.msg)exportRoot.msg.x = w/2;
 		//重繪主要畫布
 		ReDraw();
 	}
@@ -62,6 +81,12 @@ const starting = () =>{
 
 	exportRoot.heart_title.play();
 	exportRoot.heart_title.heart_swing.play();
+
+	exportRoot.title.play();
+
+	//exportRoot.loading.visible = !1;
+
+	exportRoot.msg.text = getParameterByName('msg');
 
 	canvas.addEventListener('contextmenu', function(e){e.preventDefault();});
 
@@ -123,7 +148,7 @@ const HeartCreate = (x=0,y=0) =>{
 	game.hearts.push(NewHeart);
 	NewHeart.x = x;
 	NewHeart.y = y;
-	exportRoot.addChild(NewHeart);
+	exportRoot.empty.addChild(NewHeart);
 	game.creating = !0;
 	ReDraw();
 }
@@ -143,6 +168,7 @@ const HeartBorn = () =>{
 	game.creating = !1;
 	game.hearts.last().play();
 	game.hearts.last().heart_swing.play();
+	//game.hearts.last().heart_swing.heart_proto.cache(-60,-50,120,100);
 }
 
 const Ticking = e =>{
@@ -152,10 +178,13 @@ const Ticking = e =>{
 		length--;
 		game.hearts[length].y -= game.heartspeed / Math.sqrt( game.hearts[length].scaleY );
 		if(game.hearts[length].y < -500){
-			exportRoot.removeChild(game.hearts[length]);
+			exportRoot.empty.removeChild(game.hearts[length]);
 			game.hearts.splice(length,1);
 		}
 	}
 
 	if(exportRoot.heart_title.y > -500)exportRoot.heart_title.y -= game.heartspeed;
+	if(exportRoot.msg.y > -1000)exportRoot.msg.y -= game.heartspeed/2;
+	if(exportRoot.subtitle.alpha<1)exportRoot.subtitle.alpha += 0.01;
+	if(exportRoot.loading.alpha>0)exportRoot.loading.alpha -= 0.1;
 }

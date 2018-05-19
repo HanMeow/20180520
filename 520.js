@@ -64,7 +64,7 @@ var init = () =>{
 	resizeCanvas();
 
 	createjs.Sound.on("fileload", SoundLoaded);
- 	createjs.Sound.registerSound("https://github.com/HanMeow/20180520/raw/master/Yanni%20-%20In%20The%20Morning%20Light%20Piano%20Cover.mp3", "theme");
+ 	createjs.Sound.registerSound("./Yanni - In The Morning Light Piano Cover.mp3", "theme");
 
 }
 

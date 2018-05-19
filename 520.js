@@ -184,7 +184,7 @@ const Ticking = e =>{
 	}
 
 	if(exportRoot.heart_title.y > -500)exportRoot.heart_title.y -= game.heartspeed;
-	if(exportRoot.msg.y > -1000)exportRoot.msg.y -= game.heartspeed/2;
+	if(exportRoot.msg.y > -1000)exportRoot.msg.y -= game.heartspeed/4;
 	if(exportRoot.subtitle.alpha<1)exportRoot.subtitle.alpha += 0.01;
 	if(exportRoot.loading.alpha>0)exportRoot.loading.alpha -= 0.1;
 }

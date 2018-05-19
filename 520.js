@@ -87,6 +87,7 @@ const starting = () =>{
 	//exportRoot.loading.visible = !1;
 
 	exportRoot.msg.text = getParameterByName('msg');
+	exportRoot.msg.y = window.innerHeight;
 
 	canvas.addEventListener('contextmenu', function(e){e.preventDefault();});
 

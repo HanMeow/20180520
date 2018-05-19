@@ -42,8 +42,8 @@ var init = () =>{
 		r = window.devicePixelRatio;
 
 		//畫布寬高
-		canvas.style.width = w + "px";
-		canvas.style.height = h + "px";
+		//canvas.style.width = w + "px";
+		//canvas.style.height = h + "px";
 		//畫布像素(?)
 		canvas.width = w;
 		canvas.height = h;
@@ -64,7 +64,7 @@ var init = () =>{
 	resizeCanvas();
 
 	createjs.Sound.on("fileload", SoundLoaded);
- 	createjs.Sound.registerSound("./Yanni - In The Morning Light Piano Cover.mp3", "theme");
+ 	createjs.Sound.registerSound("https://github.com/HanMeow/20180520/raw/master/Yanni%20-%20In%20The%20Morning%20Light%20Piano%20Cover.mp3", "theme");
 
 }
 
@@ -185,7 +185,7 @@ const Ticking = e =>{
 	}
 
 	if(exportRoot.heart_title.y > -500)exportRoot.heart_title.y -= game.heartspeed;
-	if(exportRoot.msg.y > -1000)exportRoot.msg.y -= game.heartspeed/4;
+	if(exportRoot.msg.y > - exportRoot.msg.getMeasuredHeight() )exportRoot.msg.y -= game.heartspeed/4;
 	if(exportRoot.subtitle.alpha<1)exportRoot.subtitle.alpha += 0.01;
 	if(exportRoot.loading.alpha>0)exportRoot.loading.alpha -= 0.1;
 }

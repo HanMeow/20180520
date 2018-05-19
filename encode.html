@@ -1,0 +1,35 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>520 小卡產生器</title>
+<style type="text/css">
+	body {background: #FFB7FF; color: black;}
+
+	h1 {text-align: center; font-family: Arial, sans-serif; line-height: 0.85em; margin-bottom: 0.33em; padding-bottom: 0;}
+
+	textarea {background: #EEF;}
+
+	div{
+		display:flex;
+    	align-items:center;
+    	justify-content:center;
+    }
+
+</style>
+<script type="text/javascript">
+	function encode() {
+		let obj = document.getElementById('dencoder');
+		let unencoded = obj.value;
+		let value = encodeURIComponent(unencoded).replace(/'/g,"%27").replace(/"/g,"%22");
+		let link = document.getElementById('enclink');
+		link.href = 'https://hanmeow.github.io/20180520/?msg=' + value;
+		link.innerHTML = 'https://hanmeow.github.io/20180520/?msg=' + value;
+	}
+</script>
+</head>
+	<body>
+		<h1>520 小卡產生器</h1>
+		<div><textarea cols="100" rows="20" id="dencoder"></textarea></div>
+		<div><input type="button" onclick="encode()" value="轉換"></div>
+		<div><a id="enclink" href=""></a></div>
+	</body>
+</html>

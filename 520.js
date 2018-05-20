@@ -34,6 +34,8 @@ var init = () =>{
 
 	createjs.Ticker.addEventListener("tick", stage);
 
+	canvas.addEventListener('contextmenu', function(e){e.preventDefault();});
+
 	//Code to support hidpi screens and responsive scaling.
 	resizeCanvas = function(){
 
@@ -69,10 +71,19 @@ var init = () =>{
 }
 
 const SoundLoaded = e =>{
-	let instance = createjs.Sound.play("theme",{ loop: -1, volume: 1, offset: 1500 });  // play using id.  Could also use full source path or event.src.
-	//instance.on("complete", this.handleComplete, this);
-	//instance.volume = 0.5;
-	starting();
+	exportRoot.loading.gotoAndPlay(60);
+	canvas.addEventListener('click', e=>{
+		if(!game){
+			//log('e.which==3');
+			createjs.WebAudioPlugin.context.resume().then(() => {
+				let instance = createjs.Sound.play("theme",{ loop: -1, volume: 1, offset: 1500 });
+				//instance.on("complete", this.handleComplete, this);
+				//instance.volume = 0.5;
+				starting();
+				//log('Playback resumed successfully');
+			});
+		}
+	});
 }
 
 //開始執行函數
@@ -84,12 +95,10 @@ const starting = () =>{
 
 	exportRoot.title.play();
 
-	//exportRoot.loading.visible = !1;
+	exportRoot.loading.visible = !1;
 
 	exportRoot.msg.text = getParameterByName('msg');
 	exportRoot.msg.y = window.innerHeight;
-
-	canvas.addEventListener('contextmenu', function(e){e.preventDefault();});
 
 	canvas.addEventListener('mousedown', MouseDown);
     canvas.addEventListener('mouseup', MouseUp);
@@ -187,5 +196,5 @@ const Ticking = e =>{
 	if(exportRoot.heart_title.y > -500)exportRoot.heart_title.y -= game.heartspeed;
 	if(exportRoot.msg.y > - exportRoot.msg.getMeasuredHeight() )exportRoot.msg.y -= game.heartspeed/4;
 	if(exportRoot.subtitle.alpha<1)exportRoot.subtitle.alpha += 0.01;
-	if(exportRoot.loading.alpha>0)exportRoot.loading.alpha -= 0.1;
+	//if(exportRoot.loading.alpha>0)exportRoot.loading.alpha -= 0.1;
 }

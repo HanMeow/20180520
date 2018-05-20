@@ -66,7 +66,7 @@ var init = () =>{
 	resizeCanvas();
 
 	createjs.Sound.on("fileload", SoundLoaded);
- 	createjs.Sound.registerSound("./Yanni - In The Morning Light Piano Cover.mp3", "theme");
+ 	createjs.Sound.registerSound("./Yanni - In The Morning Light Piano Cover short ver.mp3", "theme");
 
 }
 
@@ -75,13 +75,19 @@ const SoundLoaded = e =>{
 	canvas.addEventListener('click', e=>{
 		if(!game){
 			//log('e.which==3');
-			createjs.WebAudioPlugin.context.resume().then(() => {
-				let instance = createjs.Sound.play("theme",{ loop: -1, volume: 1, offset: 1500 });
-				//instance.on("complete", this.handleComplete, this);
-				//instance.volume = 0.5;
+			if(createjs.WebAudioPlugin.context.resume){
+				createjs.WebAudioPlugin.context.resume().then(() => {
+					let instance = createjs.Sound.play("theme",{ loop: -1, volume: 1, offset: 0 });
+					//instance.on("complete", this.handleComplete, this);
+					//instance.volume = 0.5;
+					starting();
+					//log('Playback resumed successfully');
+				});
+			}else{
+				let instance = createjs.Sound.play("theme",{ loop: -1, volume: 1, offset: 0 });
 				starting();
-				//log('Playback resumed successfully');
-			});
+			}
+			
 		}
 	});
 }

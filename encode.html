@@ -1,38 +1,76 @@
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title>520 小卡產生器</title>
-<style type="text/css">
-	body {background: #FFB7FF; color: black;}
+<html>
 
-	h1 {text-align: center; font-family: Arial, sans-serif; line-height: 0.85em; margin-bottom: 0.33em; padding-bottom: 0;}
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>520 小卡產生器</title>
+	<style type="text/css">
+		body {
+			background: #FFB7FF;
+			color: black;
+		}
 
-	textarea {text-align: center;font-size: 1.5em;background: #EEF;}
+		h1 {
+			text-align: center;
+			font-family: Arial, sans-serif;
+			line-height: 0.85em;
+			font-size: 3em;
+			color: rgb(232, 20, 118);
+			margin-bottom: 0.33em;
+			padding-bottom: 0;
+			margin: 1em 0;
+		}
 
-	div{
-		display:flex;
-    	align-items:center;
-    	justify-content:center;
-    }
+		textarea {
+			width: 100%;
+			text-align: center;
+			font-size: 2.5em;
+			background: #EEF;
+			border: none;
+			margin: 1em 0;
+			border-radius: 2em;
+			padding: 2em;
+		}
 
-    input{font-size: 2.5em;}
-    a{word-break: break-all;font-size: 1.5em;}
+		div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 
-</style>
-<script type="text/javascript">
-	function encode() {
-		let obj = document.getElementById('dencoder');
-		let unencoded = obj.value;
-		let value = encodeURIComponent(unencoded).replace(/'/g,"%27").replace(/"/g,"%22");
-		let link = document.getElementById('enclink');
-		link.href = 'https://hanmeow.github.io/20180520/?msg=' + value;
-		link.innerHTML = 'https://hanmeow.github.io/20180520/?msg=' + value;
-	}
-</script>
+		button {
+			font-size: 2.5em;
+			border: none;
+			border-radius: 10em;
+			padding: .5em 1.5em;
+			background-color: #fbc467;
+			color: white;
+			font-weight: bold;
+			letter-spacing: .5em;
+		}
+
+		a {
+			word-break: break-all;
+			font-size: 2.5em;
+			margin: 1em 0;
+		}
+	</style>
+	<script type="text/javascript">
+		function encode() {
+			let obj = document.getElementById('dencoder');
+			let unencoded = obj.value;
+			let value = encodeURIComponent(unencoded)
+			let link = document.getElementById('enclink');
+			link.href = 'https://hanmeow.github.io/20180520/?msg=' + value;
+			link.innerHTML = 'https://hanmeow.github.io/20180520/?msg=' + value;
+		}
+	</script>
 </head>
-	<body>
-		<h1>520 小卡產生器</h1>
-		<div><textarea cols="100" rows="20" id="dencoder"></textarea></div>
-		<div><input type="button" onclick="encode()" value="轉換"></div>
-		<div><a id="enclink" href=""></a></div>
-	</body>
+
+<body>
+	<h1>520 小卡產生器</h1>
+	<div><textarea rows="10" id="dencoder"></textarea></div>
+	<div><button onclick="encode()">轉換</button></div>
+	<div><a id="enclink" href=""></a></div>
+</body>
+
 </html>

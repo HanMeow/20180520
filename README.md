@@ -4,8 +4,8 @@
 https://hanmeow.github.io/20180520/?msg=love%20you  
 小卡就會有「love you」
 
-或者至
-https://hanmeow.github.io/20180520/encode.html
-將訊息轉換成網址
+或者至  
+https://hanmeow.github.io/20180520/encode.html  
+將訊息轉換成網址  
   
 enjoy it!
